@@ -19,7 +19,9 @@
 #### Windows
 1. [MariaDB 공식 사이트](https://mariadb.org/download/)에서 **MariaDB 11.4.7** 다운로드
    - "Download" 버튼 클릭 → Windows 선택 → MSI Package 다운로드
-2. 설치 과정에서 root 비밀번호 설정 (기억해두세요!)
+2. 설치 과정에서 다음 설정을 확인하세요:
+   - root 비밀번호 설정 (기억해두세요!)
+   - **"Use UTF8 as default server's character set"** 체크박스 선택 ✅
 3. 설치 완료 후 서비스 자동 시작됨
 4. 설치 확인: `mysql --version`
 
