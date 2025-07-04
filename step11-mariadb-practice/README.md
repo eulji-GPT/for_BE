@@ -14,29 +14,57 @@
 
 ### MariaDB 설치
 
+> **권장 버전**: MariaDB 11.4.7 (LTS)
+
 #### Windows
-1. [MariaDB 공식 사이트](https://mariadb.org/download/)에서 다운로드
-2. 설치 과정에서 root 비밀번호 설정
-3. 설치 완료 후 서비스 시작
+1. [MariaDB 공식 사이트](https://mariadb.org/download/)에서 **MariaDB 11.4.7** 다운로드
+   - "Download" 버튼 클릭 → Windows 선택 → MSI Package 다운로드
+2. 설치 과정에서 root 비밀번호 설정 (기억해두세요!)
+3. 설치 완료 후 서비스 자동 시작됨
+4. 설치 확인: `mysql --version`
 
 #### macOS (Homebrew)
 ```bash
-brew install mariadb
-brew services start mariadb
+# MariaDB 11.4.7 설치
+brew install mariadb@11.4
+
+# 서비스 시작
+brew services start mariadb@11.4
+
+# PATH 설정 (필요시)
+echo 'export PATH="/opt/homebrew/opt/mariadb@11.4/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
 ```
 
 #### Ubuntu/Debian
 ```bash
+# 시스템 업데이트
 sudo apt update
-sudo apt install mariadb-server
+
+# MariaDB 11.4 저장소 추가
+sudo apt install software-properties-common
+sudo apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc'
+sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] https://mirror.lstn.net/mariadb/repo/11.4/ubuntu focal main'
+
+# MariaDB 11.4 설치
+sudo apt update
+sudo apt install mariadb-server=1:11.4.7+maria~focal
+
+# 서비스 시작 및 자동 시작 설정
 sudo systemctl start mariadb
 sudo systemctl enable mariadb
+
+# 보안 설정 (권장)
+sudo mysql_secure_installation
 ```
 
 ### MariaDB 초기 설정
 ```sql
--- MariaDB 접속
+-- MariaDB 접속 (Windows: 시작 메뉴에서 MariaDB Client 실행)
 mysql -u root -p
+
+-- 버전 확인
+SELECT VERSION();
 
 -- 데이터베이스 생성
 CREATE DATABASE test_db;
@@ -45,6 +73,21 @@ CREATE DATABASE test_db;
 CREATE USER 'testuser'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON test_db.* TO 'testuser'@'localhost';
 FLUSH PRIVILEGES;
+
+-- 생성된 데이터베이스 확인
+SHOW DATABASES;
+```
+
+### 설치 확인
+```bash
+# 버전 확인
+mysql --version
+
+# 서비스 상태 확인 (Linux/macOS)
+systemctl status mariadb
+
+# Windows에서 서비스 확인
+services.msc에서 MariaDB 서비스 확인
 ```
 
 ## 📦 Python 패키지 설치
