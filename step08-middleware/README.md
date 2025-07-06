@@ -1,10 +1,10 @@
 # Step 08: 미들웨어
 
-이 단계에서는 FastAPI 미들웨어를 사용하여 요청/응답 처리를 커스터마이징하는 방법을 학습합니다.
+을지대학교 을GPT - FastAPI 미들웨어를 사용하여 요청/응답 처리를 커스터마이징하는 방법을 학습합니다.
 
 ## 🎯 학습 목표
 
-- 커스텀 미들웨어 작성
+- 을지대학교 을GPT 프로젝트에서 커스텀 미들웨어 작성
 - CORS 설정 및 관리
 - 로깅 미들웨어 구현
 - 성능 모니터링 미들웨어
@@ -17,7 +17,32 @@
 - 미들웨어 체인
 - 순서의 중요성
 
-### 2. 내장 미들웨어
+## 🏥 을지대학교 을GPT 미들웨어 특성
+
+### 1. 을지대학교 을GPT 로깅 미들웨어
+- 을지대학교 학생 API 접근 로그
+- 을지대학교 을GPT 프로젝트 활동 추적
+- 의료 데이터 접근 보안 로그
+
+### 2. 을지대학교 을GPT 성능 모니터링
+- API 응답 시간 측정
+- 을지대학교 을GPT 서버 리소스 모니터링
+- 데이터베이스 쿼리 성능 추적
+
+## 🔧 을지대학교 을GPT 미들웨어 예제
+
+### 1. 을지대학교 을GPT 커스텀 로깅
+```python
+@app.middleware("http")
+async def eulji_gpt_logging_middleware(request: Request, call_next):
+    # 을지대학교 을GPT 요청 로깅
+    start_time = time.time()
+    response = await call_next(request)
+    process_time = time.time() - start_time
+    
+    logger.info(f"을지대학교 을GPT - {request.method} {request.url} - {process_time:.4f}s")
+    return response
+```
 
 - CORSMiddleware
 - TrustedHostMiddleware

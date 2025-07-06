@@ -1,6 +1,6 @@
 """
 Step 04: 요청 본문
-Pydantic 모델을 사용한 요청 본문 처리 예제입니다.
+을지대학교 을GPT - Pydantic 모델을 사용한 요청 본문 처리
 """
 
 from fastapi import FastAPI, HTTPException, status
@@ -11,31 +11,46 @@ from enum import Enum
 
 # FastAPI 애플리케이션 인스턴스 생성
 app = FastAPI(
-    title="FastAPI 튜토리얼 - Step 04",
-    description="요청 본문과 Pydantic 모델을 사용한 API",
+    title="을지대학교 을GPT - Step 04",
+    description="을지대학교 을GPT 프로젝트 - 요청 본문과 Pydantic 모델을 사용한 API",
     version="1.0.0"
 )
 
-# 열거형 정의
-class UserRole(str, Enum):
-    admin = "admin"
-    user = "user"
-    guest = "guest"
+# 을지대학교 전공 및 역할 열거형 정의
+class EuljiMajor(str, Enum):
+    nursing = "간호학과"
+    radiology = "방사선학과"
+    medical_it = "의료IT학과"
+    physical_therapy = "물리치료학과"
 
-class ProductCategory(str, Enum):
-    electronics = "electronics"
-    clothing = "clothing"
-    books = "books"
-    home = "home"
+class StudentRole(str, Enum):
+    student = "학생"
+    admin = "관리자"
+    professor = "교수"
+    assistant = "조교"
 
-# Pydantic 모델 정의
-class UserBase(BaseModel):
-    name: str = Field(..., min_length=2, max_length=100, description="사용자 이름")
+class ProjectCategory(str, Enum):
+    ai = "AI프로젝트"
+    web = "웹개발"
+    mobile = "모바일앱"
+    healthcare = "의료시스템"
+
+# 을지대학교 학생 모델 정의
+class EuljiStudentBase(BaseModel):
+    name: str = Field(..., min_length=2, max_length=50, description="학생 이름")
     email: EmailStr = Field(..., description="이메일 주소")
-    age: int = Field(..., ge=1, le=120, description="나이")
-    role: UserRole = Field(default=UserRole.user, description="사용자 역할")
+    student_id: str = Field(..., min_length=8, max_length=12, description="학번")
+    major: EuljiMajor = Field(..., description="전공")
+    grade: int = Field(..., ge=1, le=4, description="학년")
+    role: StudentRole = Field(default=StudentRole.student, description="역할")
+    
+    @validator('student_id')
+    def validate_student_id(cls, v):
+        if not v.isdigit():
+            raise ValueError('학번은 숫자만 포함해야 합니다')
+        return v
 
-class UserCreate(UserBase):
+class EuljiStudentCreate(EuljiStudentBase):
     password: str = Field(..., min_length=8, description="비밀번호 (8자 이상)")
     confirm_password: str = Field(..., description="비밀번호 확인")
     
@@ -45,41 +60,42 @@ class UserCreate(UserBase):
             raise ValueError('비밀번호가 일치하지 않습니다')
         return v
 
-class UserResponse(UserBase):
+class EuljiStudentResponse(EuljiStudentBase):
     id: int
     created_at: datetime
     is_active: bool = True
 
-class UserUpdate(BaseModel):
-    name: Optional[str] = Field(None, min_length=2, max_length=100)
+class EuljiStudentUpdate(BaseModel):
+    name: Optional[str] = Field(None, min_length=2, max_length=50)
     email: Optional[EmailStr] = None
-    age: Optional[int] = Field(None, ge=1, le=120)
-    role: Optional[UserRole] = None
+    major: Optional[EuljiMajor] = None
+    grade: Optional[int] = Field(None, ge=1, le=4)
+    role: Optional[StudentRole] = None
 
-class ProductBase(BaseModel):
-    name: str = Field(..., min_length=1, max_length=200, description="제품명")
-    price: float = Field(..., gt=0, description="가격")
-    category: ProductCategory = Field(..., description="카테고리")
-    description: Optional[str] = Field(None, max_length=1000, description="제품 설명")
-    is_available: bool = Field(default=True, description="판매 가능 여부")
+class EuljiProjectBase(BaseModel):
+    name: str = Field(..., min_length=1, max_length=200, description="프로젝트명")
+    description: Optional[str] = Field(None, max_length=1000, description="프로젝트 설명")
+    category: ProjectCategory = Field(..., description="카테고리")
+    team_size: int = Field(..., gt=0, le=10, description="팀 크기")
+    is_active: bool = Field(default=True, description="활성 상태")
 
-class ProductCreate(ProductBase):
+class EuljiProjectCreate(EuljiProjectBase):
     pass
 
-class ProductResponse(ProductBase):
+class EuljiProjectResponse(EuljiProjectBase):
     id: int
     created_at: datetime
 
-class OrderItem(BaseModel):
-    product_id: int = Field(..., gt=0, description="제품 ID")
-    quantity: int = Field(..., gt=0, description="수량")
+class ProjectMember(BaseModel):
+    student_id: int = Field(..., gt=0, description="학생 ID")
+    role: str = Field(..., description="역할")
     
-class OrderCreate(BaseModel):
-    user_id: int = Field(..., gt=0, description="주문자 ID")
-    items: List[OrderItem] = Field(..., min_items=1, description="주문 항목")
-    notes: Optional[str] = Field(None, max_length=500, description="주문 메모")
+class ProjectTeamCreate(BaseModel):
+    project_id: int = Field(..., gt=0, description="프로젝트 ID")
+    members: List[ProjectMember] = Field(..., min_items=1, description="팀 멤버")
+    notes: Optional[str] = Field(None, max_length=500, description="비고")
 
-class OrderResponse(BaseModel):
+class ProjectTeamResponse(BaseModel):
     id: int
     user_id: int
     items: List[OrderItem]

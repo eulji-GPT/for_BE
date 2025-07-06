@@ -1,35 +1,35 @@
-# Step 03: 경로 매개변수
+# Step 03: 경로 매개변수 - 을지대학교 을GPT
 
-이 단계에서는 동적 경로 매개변수를 사용하여 더 유연하고 강력한 API를 만들어봅니다.
+을지대학교 을GPT 프로젝트에서 동적 경로 매개변수를 사용하여 더 유연하고 강력한 API를 만들어봅니다.
 
 ## 🎯 학습 목표
 
-- 경로 매개변수 사용법 완전 이해
-- 매개변수 타입 지정 및 고급 검증
-- 여러 매개변수 조합 및 복잡한 경로 구성
-- 경로 매개변수 제약 조건 설정
+- 을지대학교 을GPT 프로젝트에서 경로 매개변수 사용법 완전 이해
+- 을지대학교 학생 및 프로젝트 데이터에 대한 매개변수 타입 지정 및 고급 검증
+- 을지대학교 을GPT 여러 매개변수 조합 및 복잡한 경로 구성
+- 을지대학교 을GPT 경로 매개변수 제약 조건 설정
 - HTTPException을 활용한 에러 처리
-- 실제 데이터를 활용한 CRUD 기본 연산
+- 을지대학교 을GPT 실제 데이터를 활용한 CRUD 기본 연산
 
 ## 📋 단계별 진행
 
-### 1. 아나콘다 환경 설정
+### 1. 을지대학교 을GPT 아나콘다 환경 설정
 
 ```bash
 # 사용 가능한 conda 환경 확인
 conda info --envs
 
-# 특정 환경 활성화
+# 을지대학교 을GPT 전용 환경 활성화
 conda activate Python3.11-eulGPT-Backend
 ```
 
-### 2. 애플리케이션 실행
+### 2. 을지대학교 을GPT 애플리케이션 실행
 
 ```bash
 # Step 03 디렉토리로 이동
 cd step03-path-parameters
 
-# FastAPI 애플리케이션 실행
+# 을지대학교 을GPT FastAPI 애플리케이션 실행
 python main.py
 ```
 
@@ -41,13 +41,13 @@ INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 ```
 
-### 3. 주요 엔드포인트 테스트
+### 3. 을지대학교 을GPT 주요 엔드포인트 테스트
 
-**기본 엔드포인트들:**
-- 루트: `http://localhost:8000/`
-- 사용자 조회: `http://localhost:8000/users/1`
-- 제품 조회: `http://localhost:8000/products/1`
-- 인사말: `http://localhost:8000/greet/홍길동`
+**을지대학교 을GPT 기본 엔드포인트들:**
+- 을지대학교 을GPT 루트: `http://localhost:8000/`
+- 을지대학교 학생 조회: `http://localhost:8000/students/1`
+- 을지대학교 프로젝트 조회: `http://localhost:8000/projects/1`
+- 을지대학교 을GPT 인사말: `http://localhost:8000/greet/김을지`
 
 **고급 엔드포인트들:**
 - 계산기: `http://localhost:8000/calculate/multiply/12/8`

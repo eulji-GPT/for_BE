@@ -1,3 +1,4 @@
+# 을지대학교 을GPT - MariaDB 연결 및 실습
 import pymysql
 import mysql.connector
 from mysql.connector import Error
@@ -7,19 +8,19 @@ from dotenv import load_dotenv
 # 환경 변수 로드
 load_dotenv()
 
-class MariaDBConnection:
-    """MariaDB 연결 클래스"""
+class EuljiMariaDBConnection:
+    """을지대학교 을GPT - MariaDB 연결 클래스"""
     
     def __init__(self):
         self.host = os.getenv('DB_HOST', 'localhost')
         self.port = int(os.getenv('DB_PORT', 3306))
         self.user = os.getenv('DB_USER', 'root')
         self.password = os.getenv('DB_PASSWORD', '')
-        self.database = os.getenv('DB_NAME', 'test_db')
+        self.database = os.getenv('DB_NAME', 'eulji_gpt_db')
         self.connection = None
         
     def connect_pymysql(self):
-        """PyMySQL을 사용한 MariaDB 연결"""
+        """을지대학교 을GPT - PyMySQL을 사용한 MariaDB 연결"""
         try:
             self.connection = pymysql.connect(
                 host=self.host,

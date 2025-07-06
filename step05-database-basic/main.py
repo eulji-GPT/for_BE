@@ -1,6 +1,6 @@
 """
 Step 05: 데이터베이스 기초
-SQLAlchemy를 사용한 데이터베이스 연결 및 기본 작업 예제입니다.
+을지대학교 을GPT - SQLAlchemy를 사용한 데이터베이스 연결 및 기본 작업
 """
 
 from fastapi import FastAPI, Depends, HTTPException, status
@@ -14,8 +14,8 @@ from schemas import UserCreate, UserInDB, UserUpdate, ProductCreate, ProductInDB
 
 # FastAPI 애플리케이션 인스턴스 생성
 app = FastAPI(
-    title="FastAPI 튜토리얼 - Step 05",
-    description="SQLAlchemy를 사용한 데이터베이스 기초",
+    title="을지대학교 을GPT - Step 05",
+    description="을지대학교 을GPT 프로젝트 - SQLAlchemy를 사용한 데이터베이스 기초",
     version="1.0.0"
 )
 
@@ -28,22 +28,23 @@ def startup_event():
 @app.get("/")
 def read_root():
     """
-    기본 루트 경로
+    을지대학교 을GPT - 기본 루트 경로
     """
-    return {"message": "FastAPI Step 05 - 데이터베이스 기초 예제"}
+    return {"message": "을지대학교 을GPT - FastAPI Step 05 데이터베이스 기초", "university": "을지대학교"}
 
 # 데이터베이스 연결 테스트
 @app.get("/db-test")
 def test_database_connection(db: Session = Depends(get_db)):
     """
-    데이터베이스 연결을 테스트하는 엔드포인트
+    을지대학교 을GPT - 데이터베이스 연결을 테스트하는 엔드포인트
     """
     try:
         # 간단한 쿼리 실행으로 연결 확인
         result = db.execute("SELECT 1").fetchone()
         return {
             "status": "success",
-            "message": "데이터베이스 연결이 성공했습니다",
+            "message": "을지대학교 을GPT - 데이터베이스 연결이 성공했습니다",
+            "university": "을지대학교",
             "result": result[0] if result else None
         }
     except Exception as e:

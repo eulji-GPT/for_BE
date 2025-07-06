@@ -1,22 +1,53 @@
 # Step 10: 배포
 
-이 단계에서는 FastAPI 애플리케이션을 프로덕션 환경에 배포하는 방법을 학습합니다.
+을지대학교 을GPT - FastAPI 애플리케이션을 프로덕션 환경에 배포하는 방법을 학습합니다.
 
 ## 🎯 학습 목표
 
-- Docker를 사용한 컨테이너화
+- 을지대학교 을GPT 프로젝트 Docker를 사용한 컨테이너화
 - 환경 변수 관리
 - 프로덕션 설정 최적화
 - 배포 전략 이해
 
 ## 📋 단계별 진행
 
-### 1. Docker 설정
+## 🏥 을지대학교 을GPT 배포 특성
+
+### 1. 을지대학교 을GPT Docker 설정
+- 을지대학교 을GPT 애플리케이션 컨테이너화
+- 의료 데이터 보안을 고려한 환경 설정
+- 을지대학교 을GPT 전용 Docker 이미지 빌드
+
+### 2. 을지대학교 을GPT 환경 변수
+```bash
+# 을지대학교 을GPT 환경 변수
+EULJI_GPT_DB_URL=postgresql://user:pass@localhost/eulji_gpt_db
+EULJI_GPT_SECRET_KEY=eulji-gpt-secret-key
+EULJI_GPT_API_VERSION=1.0.0
+EULJI_UNIVERSITY=을지대학교
+```
+
+## 🔧 을지대학교 을GPT Dockerfile 예제
 
 ```dockerfile
 FROM python:3.11-slim
 
 WORKDIR /app
+
+# 을지대학교 을GPT 의존성 설치
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 을지대학교 을GPT 애플리케이션 복사
+COPY . .
+
+# 을지대학교 을GPT 환경 변수 설정
+ENV EULJI_GPT_ENV=production
+ENV EULJI_UNIVERSITY=을지대학교
+
+# 을지대학교 을GPT 서버 실행
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+```
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt

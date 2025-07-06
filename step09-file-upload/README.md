@@ -1,10 +1,10 @@
 # Step 09: 파일 업로드
 
-이 단계에서는 파일 업로드 기능을 구현하고 파일을 안전하게 처리하는 방법을 학습합니다.
+을지대학교 을GPT - 파일 업로드 기능을 구현하고 파일을 안전하게 처리하는 방법을 학습합니다.
 
 ## 🎯 학습 목표
 
-- 파일 업로드 엔드포인트 구현
+- 을지대학교 을GPT 프로젝트에서 파일 업로드 엔드포인트 구현
 - 파일 유효성 검사
 - 이미지 파일 처리
 - 파일 저장 및 관리
@@ -17,7 +17,43 @@
 - 파일 크기 제한
 - 파일 형식 검증
 
-### 2. 이미지 처리
+## 🏥 을지대학교 을GPT 파일 업로드 특성
+
+### 1. 을지대학교 학생 프로필 사진
+- 을지대학교 학생 증명사진 업로드
+- 프로필 이미지 크기 조정 및 최적화
+- 을지대학교 을GPT 학생 이미지 저장소 관리
+
+### 2. 을지대학교 을GPT 프로젝트 파일
+- 프로젝트 문서 업로드 (PDF, DOC)
+- 의료 이미지 파일 처리
+- AI 모델 파일 업로드 및 관리
+
+## 🔧 을지대학교 을GPT 파일 업로드 예제
+
+### 1. 을지대학교 학생 프로필 업로드
+```python
+@app.post("/students/{student_id}/profile-image")
+async def upload_eulji_student_profile(
+    student_id: int,
+    file: UploadFile = File(...),
+    db: Session = Depends(get_db)
+):
+    # 을지대학교 학생 프로필 이미지 업로드 로직
+    pass
+```
+
+### 2. 을지대학교 을GPT 프로젝트 파일 업로드
+```python
+@app.post("/projects/{project_id}/files")
+async def upload_eulji_project_file(
+    project_id: int,
+    file: UploadFile = File(...),
+    db: Session = Depends(get_db)
+):
+    # 을지대학교 을GPT 프로젝트 파일 업로드 로직
+    pass
+```
 
 ```bash
 pip install Pillow

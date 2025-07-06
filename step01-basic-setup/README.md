@@ -1,12 +1,12 @@
-# Step 01: 기본 설정
+# Step 01: 기본 설정 - 을지대학교 을GPT
 
-이 단계에서는 FastAPI 개발을 위한 기본 환경을 설정합니다.
+을지대학교 을GPT 프로젝트의 FastAPI 개발을 위한 기본 환경을 설정합니다.
 
 ## 🎯 학습 목표
 
-- Python 아나콘다 환경 설정 및 활성화
+- 을지대학교 을GPT 프로젝트를 위한 Python 아나콘다 환경 설정 및 활성화
 - FastAPI 및 필요한 패키지 설치
-- 기본 프로젝트 구조 이해
+- 을지대학교 을GPT 프로젝트 구조 이해
 - 개발 환경 설정 및 애플리케이션 실행
 
 ## 📋 단계별 진행
@@ -17,13 +17,13 @@
 # 사용 가능한 conda 환경 확인
 conda info --envs
 
-# 특정 환경 활성화 (예: Python3.11-eulGPT-Backend)
+# 을지대학교 을GPT 전용 환경 활성화
 conda activate Python3.11-eulGPT-Backend
 ```
 
 ### 2. 패키지 설치
 
-requirements.txt에 정의된 패키지들:
+을지대학교 을GPT 프로젝트 requirements.txt에 정의된 패키지들:
 ```
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
@@ -39,13 +39,13 @@ pip install -r requirements.txt
 pip install fastapi==0.104.1 uvicorn[standard]==0.24.0 python-multipart==0.0.6
 ```
 
-### 3. 애플리케이션 실행
+### 3. 을지대학교 을GPT 애플리케이션 실행
 
 ```bash
 # 프로젝트 디렉토리로 이동
 cd step01-basic-setup
 
-# FastAPI 애플리케이션 실행
+# 을지대학교 을GPT FastAPI 애플리케이션 실행
 python main.py
 ```
 
@@ -73,24 +73,36 @@ step01-basic-setup/
 3. main.py 파일을 실행해보세요
 4. 웹 브라우저에서 애플리케이션 동작을 확인하세요
 
-## 🌐 애플리케이션 확인 방법
+## 🌐 을지대학교 을GPT 애플리케이션 확인 방법
 
 ### 1. 웹 브라우저에서 확인
-- 메인 페이지: `http://localhost:8000`
-- 예상 응답: `{"message": "Hello World from FastAPI Step 01!"}`
+- 을지대학교 을GPT 메인 페이지: `http://localhost:8000`
+- 예상 응답: `{"message": "을지대학교 을GPT - FastAPI Step 01 실행 중!", "project": "을지대학교 을GPT 프로젝트"}`
+- 프로젝트 정보: `http://localhost:8000/project-info`
 
-### 2. API 문서 확인
+### 2. 을지대학교 을GPT API 문서 확인
 - Swagger UI: `http://localhost:8000/docs`
 - ReDoc: `http://localhost:8000/redoc`
 
 ### 3. 터미널에서 확인
 ```bash
-# PowerShell에서 API 호출
+# PowerShell에서 을지대학교 을GPT API 호출
 Invoke-RestMethod -Uri "http://localhost:8000" -Method GET
 
-# 또는 curl 사용 (설치된 경우)
-curl http://localhost:8000
+# 을지대학교 을GPT 프로젝트 정보 조회
+Invoke-RestMethod -Uri "http://localhost:8000/project-info" -Method GET
 ```
+
+## 🏥 을지대학교 을GPT 프로젝트 특징
+
+### 1. 프로젝트 목표
+- 을지대학교 학생들을 위한 AI 기반 프로젝트
+- 의료 분야와 IT 기술의 융합
+
+### 2. 주요 기능
+- 을지대학교 학생 정보 관리
+- 의료 IT 프로젝트 지원
+- AI 기반 솔루션 제공
 
 ## 🐛 자주 발생하는 이슈
 
