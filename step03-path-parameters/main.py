@@ -1,6 +1,6 @@
 """
 Step 03: 경로 매개변수
-경로 매개변수를 사용한 동적 API 엔드포인트 예제입니다.
+을지대학교 을GPT - 경로 매개변수를 사용한 동적 API 엔드포인트
 """
 
 from fastapi import FastAPI, Path, HTTPException
@@ -9,74 +9,75 @@ from typing import Optional
 
 # FastAPI 애플리케이션 인스턴스 생성
 app = FastAPI(
-    title="FastAPI 튜토리얼 - Step 03",
-    description="경로 매개변수를 사용한 동적 API 엔드포인트",
+    title="을지대학교 을GPT - Step 03",
+    description="을지대학교 을GPT 프로젝트 - 경로 매개변수를 사용한 동적 API",
     version="1.0.0"
 )
 
-# 샘플 데이터
-users = {
-    1: {"id": 1, "name": "홍길동", "age": 30, "city": "서울"},
-    2: {"id": 2, "name": "김철수", "age": 25, "city": "부산"},
-    3: {"id": 3, "name": "이영희", "age": 28, "city": "대구"}
+# 을지대학교 샘플 데이터
+eulji_students = {
+    1: {"id": 1, "name": "김을지", "major": "간호학과", "grade": 3, "city": "대전"},
+    2: {"id": 2, "name": "을량이", "major": "방사선학과", "grade": 2, "city": "서울"},
+    3: {"id": 3, "name": "안건", "major": "의료IT학과", "grade": 4, "city": "성남"}
 }
 
-products = {
-    1: {"id": 1, "name": "노트북", "price": 1200000, "category": "전자제품"},
-    2: {"id": 2, "name": "마우스", "price": 25000, "category": "컴퓨터"},
-    3: {"id": 3, "name": "키보드", "price": 80000, "category": "컴퓨터"}
+eulji_projects = {
+    1: {"id": 1, "name": "을GPT", "category": "AI프로젝트", "status": "진행중", "team": "을지대학교"},
+    2: {"id": 2, "name": "스마트캠퍼스", "category": "웹개발", "status": "완료", "team": "을지대학교"},
+    3: {"id": 3, "name": "모바일앱", "category": "앱개발", "status": "계획중", "team": "을지대학교"}
 }
 
 # 기본 루트 엔드포인트
 @app.get("/")
 def read_root():
     """
-    기본 루트 경로
+    을지대학교 을GPT - 기본 루트 경로
     """
-    return {"message": "FastAPI Step 03 - 경로 매개변수 예제"}
+    return {"message": "을지대학교 을GPT - FastAPI Step 03", "university": "을지대학교"}
 
-# 단일 경로 매개변수 - 사용자 정보 조회
-@app.get("/users/{user_id}")
-def get_user(user_id: int = Path(..., gt=0, description="사용자 ID")):
+# 단일 경로 매개변수 - 학생 정보 조회
+@app.get("/students/{student_id}")
+def get_student(student_id: int = Path(..., gt=0, description="학생 ID")):
     """
-    사용자 ID를 통해 특정 사용자 정보를 조회하는 엔드포인트
+    을지대학교 학생 ID를 통해 특정 학생 정보를 조회하는 엔드포인트
     """
-    if user_id not in users:
-        raise HTTPException(status_code=404, detail="사용자를 찾을 수 없습니다")
+    if student_id not in eulji_students:
+        raise HTTPException(status_code=404, detail="을지대학교에서 해당 학생을 찾을 수 없습니다")
     
-    return {"user": users[user_id]}
+    return {"student": eulji_students[student_id], "university": "을지대학교"}
 
-# 단일 경로 매개변수 - 제품 정보 조회
-@app.get("/products/{product_id}")
-def get_product(product_id: int = Path(..., gt=0, le=1000, description="제품 ID")):
+# 단일 경로 매개변수 - 프로젝트 정보 조회
+@app.get("/projects/{project_id}")
+def get_project(project_id: int = Path(..., gt=0, le=1000, description="프로젝트 ID")):
     """
-    제품 ID를 통해 특정 제품 정보를 조회하는 엔드포인트
+    을지대학교 프로젝트 ID를 통해 특정 프로젝트 정보를 조회하는 엔드포인트
     """
-    if product_id not in products:
-        raise HTTPException(status_code=404, detail="제품을 찾을 수 없습니다")
+    if project_id not in eulji_projects:
+        raise HTTPException(status_code=404, detail="을지대학교에서 해당 프로젝트를 찾을 수 없습니다")
     
-    return {"product": products[product_id]}
+    return {"project": eulji_projects[project_id], "university": "을지대학교"}
 
-# 문자열 경로 매개변수 - 인사말
+# 문자열 경로 매개변수 - 을지대학교 인사말
 @app.get("/greet/{name}")
-def greet_user(name: str = Path(..., min_length=1, max_length=50, description="사용자 이름")):
+def greet_eulji_student(name: str = Path(..., min_length=1, max_length=50, description="학생 이름")):
     """
-    이름을 받아 인사말을 반환하는 엔드포인트
+    을지대학교 학생 이름을 받아 인사말을 반환하는 엔드포인트
     """
     return {
-        "message": f"안녕하세요, {name}님!",
-        "timestamp": datetime.now().isoformat()
+        "message": f"안녕하세요, {name}님! 을지대학교 을GPT 프로젝트에 오신 것을 환영합니다!",
+        "timestamp": datetime.now().isoformat(),
+        "university": "을지대학교"
     }
 
-# 여러 경로 매개변수 - 계산기
+# 여러 경로 매개변수 - 을GPT 계산기
 @app.get("/calculate/{operation}/{num1}/{num2}")
-def calculate(
+def eulji_calculate(
     operation: str = Path(..., description="연산 종류 (add, subtract, multiply, divide)"),
     num1: float = Path(..., description="첫 번째 숫자"),
     num2: float = Path(..., description="두 번째 숫자")
 ):
     """
-    두 숫자로 계산을 수행하는 엔드포인트
+    을지대학교 을GPT - 두 숫자로 계산을 수행하는 엔드포인트
     """
     operations = {
         "add": num1 + num2,
@@ -86,87 +87,92 @@ def calculate(
     }
     
     if operation not in operations:
-        raise HTTPException(status_code=400, detail="지원하지 않는 연산입니다")
+        raise HTTPException(status_code=400, detail="을지대학교 을GPT - 지원하지 않는 연산입니다")
     
     if operation == "divide" and num2 == 0:
-        raise HTTPException(status_code=400, detail="0으로 나눌 수 없습니다")
+        raise HTTPException(status_code=400, detail="을지대학교 을GPT - 0으로 나눌 수 없습니다")
     
     return {
         "operation": operation,
         "operand1": num1,
         "operand2": num2,
-        "result": operations[operation]
+        "result": operations[operation],
+        "calculated_by": "을지대학교 을GPT 계산기"
     }
 
-# 경로 매개변수와 쿼리 매개변수 조합
-@app.get("/users/{user_id}/profile")
-def get_user_profile(
-    user_id: int = Path(..., gt=0, description="사용자 ID"),
+# 경로 매개변수와 쿼리 매개변수 조합 - 을지대학교 학생 프로필
+@app.get("/students/{student_id}/profile")
+def get_eulji_student_profile(
+    student_id: int = Path(..., gt=0, description="을지대학교 학생 ID"),
     include_details: bool = False
 ):
     """
-    사용자의 프로필 정보를 조회하는 엔드포인트
+    을지대학교 학생의 프로필 정보를 조회하는 엔드포인트
     """
-    if user_id not in users:
-        raise HTTPException(status_code=404, detail="사용자를 찾을 수 없습니다")
+    if student_id not in eulji_students:
+        raise HTTPException(status_code=404, detail="을지대학교에서 해당 학생을 찾을 수 없습니다")
     
-    user = users[user_id].copy()
+    student = eulji_students[student_id].copy()
     
     if include_details:
-        user["profile_created"] = datetime.now().isoformat()
-        user["status"] = "active"
+        student["profile_created"] = datetime.now().isoformat()
+        student["status"] = "을지대학교 재학생"
+        student["university"] = "을지대학교"
     
-    return {"profile": user}
+    return {"profile": student, "university": "을지대학교"}
 
-# 파일 경로 매개변수 예제
-@app.get("/files/{file_path:path}")
-def read_file(file_path: str):
+# 파일 경로 매개변수 예제 - 을지대학교
+@app.get("/eulji-files/{file_path:path}")
+def read_eulji_file(file_path: str):
     """
-    파일 경로를 받아 처리하는 엔드포인트
+    을지대학교 을GPT - 파일 경로를 받아 처리하는 엔드포인트
     """
     return {
         "file_path": file_path,
-        "message": f"파일 경로: {file_path}"
+        "message": f"을지대학교 을GPT - 파일 경로: {file_path}",
+        "university": "을지대학교"
     }
 
-# 카테고리별 제품 조회
-@app.get("/categories/{category}/products")
-def get_products_by_category(category: str = Path(..., description="제품 카테고리")):
+# 카테고리별 프로젝트 조회 - 을지대학교
+@app.get("/categories/{category}/projects")
+def get_eulji_projects_by_category(category: str = Path(..., description="을지대학교 프로젝트 카테고리")):
     """
-    카테고리별로 제품을 조회하는 엔드포인트
+    을지대학교 카테고리별로 프로젝트를 조회하는 엔드포인트
     """
-    category_products = [
-        product for product in products.values()
-        if product["category"].lower() == category.lower()
+    category_projects = [
+        project for project in eulji_projects.values()
+        if project["category"].lower() == category.lower()
     ]
     
     return {
         "category": category,
-        "products": category_products,
-        "count": len(category_products)
+        "projects": category_projects,
+        "count": len(category_projects),
+        "university": "을지대학교"
     }
 
-# 사용자 나이 그룹별 조회
-@app.get("/users/age-group/{min_age}/{max_age}")
-def get_users_by_age_group(
-    min_age: int = Path(..., ge=0, le=120, description="최소 나이"),
-    max_age: int = Path(..., ge=0, le=120, description="최대 나이")
+# 학년별 학생 조회 - 을지대학교
+@app.get("/students/grade/{min_grade}/{max_grade}")
+def get_eulji_students_by_grade(
+    min_grade: int = Path(..., ge=1, le=4, description="최소 학년"),
+    max_grade: int = Path(..., ge=1, le=4, description="최대 학년")
 ):
     """
-    나이 범위로 사용자를 조회하는 엔드포인트
+    을지대학교 학년 범위로 학생을 조회하는 엔드포인트
     """
-    if min_age > max_age:
-        raise HTTPException(status_code=400, detail="최소 나이가 최대 나이보다 클 수 없습니다")
+    if min_grade > max_grade:
+        raise HTTPException(status_code=400, detail="을지대학교 을GPT - 최소 학년이 최대 학년보다 클 수 없습니다")
     
-    filtered_users = [
-        user for user in users.values()
-        if min_age <= user["age"] <= max_age
+    filtered_students = [
+        student for student in eulji_students.values()
+        if min_grade <= student["grade"] <= max_grade
     ]
     
     return {
-        "age_range": f"{min_age}-{max_age}",
-        "users": filtered_users,
-        "count": len(filtered_users)
+        "grade_range": f"{min_grade}-{max_grade}학년",
+        "students": filtered_students,
+        "count": len(filtered_students),
+        "university": "을지대학교"
     }
 
 # 서버 실행 코드 (개발용)
