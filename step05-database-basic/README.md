@@ -155,7 +155,7 @@ python database.py
 
 ## 📚 을지대학교 을GPT 새로운 개념
 
-- **을지대학교 을GPT ORM**: Object-Relational Mapping
+- **ORM**: Object-Relational Mapping
 - **SQLAlchemy**: Python의 SQL 툴킷과 ORM
 - **세션**: 데이터베이스와의 연결을 관리하는 객체
 - **트랜잭션**: 데이터베이스 작업의 단위
