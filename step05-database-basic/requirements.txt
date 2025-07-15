@@ -1,6 +1,17 @@
-fastapi==0.104.1
-uvicorn[standard]==0.24.0
-python-multipart==0.0.6
-sqlalchemy==2.0.23
-pydantic==2.5.0
-email-validator==2.1.0
+# FastAPI 및 웹 서버
+fastapi>=0.104.0,<0.120.0
+uvicorn[standard]>=0.24.0,<0.30.0
+
+# 데이터베이스 관련
+sqlalchemy>=2.0.0,<2.1.0
+pymysql>=1.1.0,<1.2.0
+
+# 데이터 검증 및 직렬화
+pydantic>=2.5.0,<3.0.0
+email-validator>=2.1.0,<3.0.0
+
+# 환경 설정
+python-dotenv>=1.0.0,<2.0.0
+
+# 파일 업로드 처리
+python-multipart>=0.0.6,<1.0.0
