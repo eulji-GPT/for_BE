@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # 을지대학교 을GPT MariaDB 데이터베이스
+  eulji-mariadb:
+    image: mariadb:10.11
+    container_name: eulji-gpt-mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: eulji_root_2024
+      MYSQL_DATABASE: eulji_gpt_db
+      MYSQL_USER: eulji_user
+      MYSQL_PASSWORD: eulji_password
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_unicode_ci
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./sql_scripts:/docker-entrypoint-initdb.d
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - eulji-gpt-network
+
+  # 을지대학교 을GPT phpMyAdmin (MariaDB 관리 도구)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: eulji-gpt-phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: eulji-mariadb
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: eulji_root_2024
+      MYSQL_ROOT_PASSWORD: eulji_root_2024
+    ports:
+      - "8080:80"
+    depends_on:
+      - eulji-mariadb
+    networks:
+      - eulji-gpt-network
+
+volumes:
+  mariadb_data:
+    driver: local
+
+networks:
+  eulji-gpt-network:
+    driver: bridge
